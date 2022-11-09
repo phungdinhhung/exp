@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chi tiết căn hộ</title>
+    <link rel="stylesheet" href="/stylesheets/roomDetail.css" />
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+      integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: "Open sans", Arial, sans-serif;
+    }
+
+    .header-navigation {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .header-navigation a {
+      font-size: 0.8rem;
+    }
+
+    .header-navigation .breadcrumb {
+      margin-bottom: 0;
+      background-color: transparent;
+      padding: 0.2rem 1rem;
+    }
+
+    .header-navigation .btn-group {
+      margin-left: auto;
+    }
+
+    .header-navigation .btn-share {
+      position: relative;
+    }
+
+    .header-navigation .btn-share::after {
+      content: "";
+      width: 1px;
+      height: 50%;
+      background-color: #ccc;
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+    }
+
+    .store-body {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+    }
+
+    .store-body .product-info {
+      width: 60%;
+      border-right: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    .store-body .product-payment-details {
+      width: 40%;
+      padding: 15px 15px 0 15px;
+    }
+
+    .product-info .product-gallery {
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    .product-gallery-featured {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 15px 0;
+      cursor: zoom-in;
+    }
+
+    .product-gallery-thumbnails .thumbnails-list li {
+      margin-bottom: 5px;
+      cursor: pointer;
+      position: relative;
+      width: 70px;
+      height: 70px;
+    }
+
+    .thumbnails-list li img {
+      display: block;
+      width: 100%;
+    }
+
+    .product-gallery-thumbnails .thumbnails-list li:hover::before {
+      content: "";
+      width: 3px;
+      height: 100%;
+      background: #007bff;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .product-info .product-seller-recommended {
+      padding: 20px 20px 0 20px;
+    }
+
+    .product-comments textarea {
+      height: 50px;
+    }
+
+    .last-questions-list li {
+      margin-bottom: 20px;
+    }
+
+    .last-questions-list li span {
+      padding-left: 10px;
+    }
+  </style>
+  <%- include('./components/header')%>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card mb-10">
+            <div class="card-body store-body">
+              <div class="product-info">
+                <div class="product-gallery">
+                  <div class="product-gallery-thumbnails">
+                    <ol class="thumbnails-list list-unstyled">
+                      <%for(let i =0; i <room.images.length; i++) { %>
+                        <li><img src="<%=room.images[i].url%>" alt="" /></li>                       
+                      <%}%>
+                    </ol>
+                  </div>
+                  <div class="product-gallery-featured">
+                    <img src="<%=room.images[0].url%>" alt="" />
+                  </div>
+                </div>
+                <div class="product-seller-recommended">
+                  <div class="product-description mb-5">
+                    <h2 class="mb-5" style="padding-top: 20px">Mô tả:</h2>
+                    <%=room.description%>
+                  </div>
+                  <h3
+                    class="mb-5"
+                    style="margin-bottom: 20px !important; margin-top: 20px"
+                  >
+                    Phản hồi của những người đã thuê trọ
+                  </h3>
+                  <div class="feedback">
+                    <form action="/comment/post/<%=room.id%>" method="POST" class="needs-validation">
+                      <div class="rate-wrapper align-items-center">
+                        <!-- <div
+                          class="rate-select"
+                          style="text-align: center; padding-bottom: 10px"
+                        >
+                          <select class="form-select" name="rate" required>
+                            <option selected disabled value="">
+                              All rating
+                            </option>
+                            <option value="1">Bad</option>
+                            <option value="2">Quite bad</option>
+                            <option value="3">Normally</option>
+                            <option value="4">Good</option>
+                            <option value="5">Very Good</option>
+                          </select>
+                        </div> -->
+                        <div class="input-wrapper">
+                          <textarea
+                            type="text"
+                            class="form-control w-100"
+                            placeholder="Nhập bình luận"
+                            name="content"
+                            rows="5"
+                            required
+                          ></textarea>
+                          <button
+                            type="submit"
+                            class="btn btn-success"
+                            style="margin-top: 10px; margin-bottom: 20px"
+                          >
+                            Gửi
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="comment">
+                    <div class="availble-comment">
+                      <div class="user-avt">
+                        <!-- <img src="<%=user.avatar%>" alt=""> -->
+                      </div>
+                      <ul class="nav nav-tabs" id="example-tabs" role="tablist">
+                        <li class="nav-item">
+                          <a
+                            id="tab1"
+                            class="nav-link active"
+                            data-toggle="tab"
+                            role="tab"
+                            href="#pane-tab-1"
+                            >Bình luận</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            id="tab2"
+                            class="nav-link"
+                            data-toggle="tab"
+                            role="tab"
+                            href="#pane-tab-2"
+                            >Đánh giá</a
+                          >
+                        </li>
+                      </ul>
+
+                      <!-- /.content-->
+                      <div class="tab-content" style="margin-bottom: 20px">
+                        <div
+                          class="tab-pane fade show active"
+                          id="pane-tab-1"
+                          role="tabpanel"
+                          aria-labelledby="tab1"
+                        >
+                          Nội Dung bình luận
+                        </div>
+                        <div
+                          class="tab-pane fade"
+                          id="pane-tab-2"
+                          role="tabpanel"
+                          aria-labelledby="tab2"
+                        >
+                          Nội dung đánh giá
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-cmt">
+                      <%for(let i=0;i<listCmt.length; i++){%>
+                        <div class="cmt-container">
+                          <p class="username"><%=listCmt[i].userName%></p>
+                          <p class="content"><%=listCmt[i].content%></p>
+                          <%if(userName === listCmt[i].userName) {%>
+                            <form action="/comment/delete/<%=room.id%>/<%=listCmt[i].id%>" method="POST">
+                              <button type="submit" class="btn btn-outline-success btn-delete">Xóa</button>
+                            </form>
+                          <%}%>
+                        </div>
+                      <%}%>
+                    </div>
+                    <!-- <h3 class="mb-5">Một số phòng gần đây</h3>
+                    <div class="recommended-items card-deck">
+                      <div class="card" onclick="">
+                        <img
+                          src="https://via.placeholder.com/157x157"
+                          alt=""
+                          class="card-img-top"
+                        />
+                        <div class="card-body">
+                          <h5 class="card-title"><%=room.type%></h5>
+                          <span class="text-muted"
+                            ><small><%=room.address%></small></span
+                          >
+                          <span class="text-muted"
+                            ><small><%=room.price%> VND</small></span
+                          >
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img
+                          src="https://via.placeholder.com/157x157"
+                          alt=""
+                          class="card-img-top"
+                        />
+                        <div class="card-body">
+                          <h5 class="card-title"><%=room.type%></h5>
+                          <span class="text-muted"
+                            ><small><%=room.address%></small></span
+                          >
+                          <span class="text-muted"
+                            ><small><%=room.price%> VND</small></span
+                          >
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img
+                          src="https://via.placeholder.com/157x157"
+                          alt=""
+                          class="card-img-top"
+                        />
+                        <div class="card-body">
+                          <h5 class="card-title"><%=room.type%></h5>
+                          <span class="text-muted"
+                            ><small><%=room.address%></small></span
+                          >
+                          <span class="text-muted"
+                            ><small><%=room.price%> VND</small></span
+                          >
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img
+                          src="https://via.placeholder.com/157x157"
+                          alt=""
+                          class="card-img-top"
+                        />
+                        <div class="card-body">
+                          <h5 class="card-title"><%=room.type%></h5>
+                          <span class="text-muted"
+                            ><small><%=room.address%></small></span
+                          >
+                          <span class="text-muted"
+                            ><small><%=room.price%> VND</small></span
+                          >
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="product-payment-details">
+                <h3 class="type"><%=room.type%></h3>
+                <p class="address">
+                  <label>Địa chỉ: </label>
+                  <%=room.address%>
+                </p>
+                <p class="price">
+                  <label>Diện tích: </label> <%=room.acreage%> M2
+                </p>
+                <p class="price"><label>Giá cả: </label> <%=room.price%> VND</p>
+                <p class="phone">
+                  <label>Số điện thoại:</label>
+                  <%=phoneNumber%>
+                </p>
+                <p class="phone">
+                  <label>Chủ trọ: </label>
+                  <a href="/user/people/<%=userInfor._id%>">
+                    <%=userInfor.username%>
+                  </a>
+                </p>
+                <%if(role === "Người thuê trọ") {%>
+                  <div class="btn-group">
+                    <!-- <form action="/room/chooseRoom/<%=room._id%>" method="POST"> -->
+                    <%if(isChoose === false) {%>
+                      <button
+                        type="submit"
+                        class="btn btn-outline-success"
+                        data-room="<%=room._id%>"
+                        id="thue"
+                      >
+                        Thuê trọ
+                      </button>
+                    <%} else {%>
+                      <button
+                        type="button"
+                        class="btn btn-outline-success"
+                        data-room="<%=room._id%>"
+                        id="thue"
+                        style="pointer-event: none; cursor: not-allowed"
+                      >
+                      ✔
+                      </button>
+                    <%}%>
+                    <!-- </form> -->
+                    <%if(!isLike) {%>
+                    <button
+                      type="button"
+                      id="love"
+                      class="btn btn-danger"
+                      style="margin-left: 10px"
+                      data-id="<%=room.id%>"
+                    >
+                      Yêu thích
+                    </button>
+                    <%} else {%>
+                      <button
+                      type="button"
+                      id="love"
+                      class="btn btn-danger"
+                      style="margin-left: 10px; background-color: red;"
+                      data-id="<%=room.id%>"
+                    >
+                      Yêu thích
+                    </button>
+                    <%}%>
+                  </div>
+                <%}%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // select all thumbnails
+      const galleryThumbnail = document.querySelectorAll(".thumbnails-list li");
+      // select featured
+      const galleryFeatured = document.querySelector(
+        ".product-gallery-featured img"
+      );
+
+      // loop all items
+      galleryThumbnail.forEach((item) => {
+        item.addEventListener("mouseover", function () {
+          let image = item.children[0].src;
+          galleryFeatured.src = image;
+        });
+      });
+
+      // show popover
+      $(".main-questions").popover("show");
+    </script>
+    <script>
+      const love = document.getElementById("love");
+      love.addEventListener("click", () => {
+        const roomId = love.getAttribute("data-id");
+        const option = {
+          animation: true,
+          autohide: true,
+          delay: 5000,
+        };
+        let msg = "";
+        $.ajax({
+          url: `/favoriteList/room/like/${roomId}`,
+          type: "POST",
+          success: function (response) {
+            if (response.msg === "Đã yêu thích") {
+              msg = response.msg;
+              love.style.backgroundColor = "red";
+            }
+          },
+        });
+      });
+
+      //thuê trọ
+      const thue = document.getElementById("thue");
+      thue.addEventListener("click", () => {
+        const roomId = thue.getAttribute("data-room");
+        let msg = "";
+        $.ajax({
+          url: `/room/chooseRoom/${roomId}`,
+          type: "POST",
+          success: function (response) {
+            if (response.code === 1) {
+              msg = response.msg;
+              thue.innerHTML = "✔";
+              thue.style.pointerEvents = "none";
+              thue.style.cursor = "not-allowed"
+            }
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

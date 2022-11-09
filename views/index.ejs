@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('./components/header')%>
+      <div class="banner">
+        <img src="https://gotrangtri.vn/wp-content/uploads/2021/04/thiet-ke-noi-that-chung-cu-bia.jpg.webp" alt="căn hộ" class="img-banner">
+      </div>
+      <h4 class="title">Phòng trọ</h4>
+      <span id="userId" data-id="<%=userId%>"></span>
+      <div class="list-room">
+        <%for(let i = 0; i < listRoom.length; i++) {%>
+          <div class="room-item">
+                <div class="image-room">
+                  <img src="<%=listRoom[i].images[0].url%>" alt="">
+                </div>
+                <div class="room-infor">
+                  <div class="type infor-item"><label>Kiểu phòng:</label> <%=listRoom[i].type%></div>
+                  <div class="acreage infor-item"><label>Diện tích:</label> <%=listRoom[i].acreage%> m2</div>
+                  <div class="address infor-item"><label>Địa chỉ:</label> <%=listRoom[i].address%></div>
+                  <div class="description infor-item"><label>Mô tả:</label> <%=listRoom[i].description%></div>
+                  <div class="price infor-item"><label>Giá phòng:</label> <%=listRoom[i].price%> / 1 tháng</div>
+                  <% if(listRoom[i].state === true){%>
+                    <div class="state infor-item" style="color: green">Tình trạng: Còn phòng</div>
+                  <% } %>
+                  <div class="poster infor-item"><label>Người đăng tải:</label> <%=listRoom[i].username%></div>
+                </div>
+                <a class="btn-view-detail btn-outline-success" href="/room/<%=listRoom[i]._id%>">Xem chi tiết</a>
+          </div>
+        <% } %>
+      </div>
+      <h4 class="title">Căn hộ</h4>
+      <div class="list-room">
+        <%for(let i = 0; i < listRoom2.length; i++) {%>
+          <div class="room-item">
+                <div class="image-room">
+                  <img src="<%=listRoom2[i].images[0].url%>" alt="">
+                </div>
+                <div class="room-infor">
+                  <div class="type infor-item"><label>Kiểu phòng:</label> <%=listRoom2[i].type%></div>
+                  <div class="acreage infor-item"><label>Diện tích:</label> <%=listRoom2[i].acreage%> m2</div>
+                  <div class="address infor-item"><label>Địa chỉ:</label> <%=listRoom2[i].address%></div>
+                  <div class="description infor-item"><label>Mô tả:</label> <%=listRoom2[i].description%></div>
+                  <div class="price infor-item"><label>Giá phòng:</label> <%=listRoom2[i].price%> / 1 tháng</div>
+                  <% if(listRoom2[i].state === true){%>
+                    <div class="state infor-item" style="color: green">Tình trạng: Còn phòng</div>
+                  <% } %>
+                  <div class="poster infor-item"><label>Người đăng tải:</label> <%=listRoom2[i].username%></div>
+                </div>
+                <a class="btn-view-detail btn-outline-success" href="/room/<%=listRoom2[i]._id%>">Xem chi tiết</a>
+          </div>
+        <% } %>
+      </div>
+      <%if(listRoom3.length >0) {%>
+        <h4 class="title">Bài đăng mới nhất</h4>
+        <div class="list-room">
+          <%for(let i = 0; i < listRoom3.length; i++) {%>
+            <div class="room-item">
+                  <div class="image-room">
+                    <img src="<%=listRoom3[i].images[0].url%>" alt="">
+                  </div>
+                  <div class="room-infor">
+                    <div class="type infor-item"><label>Kiểu phòng:</label> <%=listRoom3[i].type%></div>
+                    <div class="acreage infor-item"><label>Diện tích:</label> <%=listRoom3[i].acreage%> m3</div>
+                    <div class="address infor-item"><label>Địa chỉ:</label> <%=listRoom3[i].address%></div>
+                    <div class="description infor-item"><label>Mô tả:</label> <%=listRoom3[i].description%></div>
+                    <div class="price infor-item"><label>Giá phòng:</label> <%=listRoom3[i].price%> / 1 tháng</div>
+                    <% if(listRoom3[i].state === true){%>
+                      <div class="state infor-item" style="color: green">Tình trạng: Còn phòng</div>
+                    <% } %>
+                    <div class="poster infor-item"><label>Người đăng tải:</label> <%=listRoom3[i].username%></div>
+                  </div>
+                  <a class="btn-view-detail btn-outline-success" href="/room/<%=listRoom3[i]._id%>">Xem chi tiết</a>
+            </div>
+          <% } %>
+        </div>
+      <%}%>
+      <!-- <h4 class="title">Phòng trọ của chủ trọ yêu thích</h4> -->
+
+      <!-- Toast like successfully-->
+      <!-- <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+        <div class="toast-header">
+          <img src="..." class="rounded mr-2" alt="...">
+          <strong class="mr-auto">Bootstrap</strong>
+          <small>11 mins ago</small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          Hello, world! This is a toast message.
+        </div>
+      </div> -->
+      <!-- <div class="toast">
+        <div class="toast-header">
+          Thông báo
+        </div>
+        <div class="toast-body">
+          
+        </div> -->
+      </div>
+      <%- include('./components/footer')%>
+      <script>
+        const likeBtn = document.getElementsByClassName("btn-like");
+        console.log(likeBtn);
+        const formLike = document.getElementById("form-like");
+        console.log('formLike: ', formLike);
+        Array.prototype.forEach.call(likeBtn, (btn) => {
+              btn.addEventListener('click', function(e) {
+                const roomId = btn.getAttribute('data-id');
+                const option = {
+                  animation: true,
+                  autohide: true,
+                  delay: 5000
+                }
+                let msg = '';
+                  $.ajax({
+                    url: `/favoriteList/room/like/${roomId}`,
+                    type: "POST",
+                    success: function (response) {
+                      if(response.msg === "Đã yêu thích") {
+                        msg = response.msg;
+                        btn.style.backgroundColor = "#ff7979";
+                        $('.toast').toast('show');
+                      }
+                    }
+                  });
+              })
+        })
+      </script>
+    </div>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="slick/slick.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  $('.list-room').slick({
+  lazyLoad: 'ondemand',
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  prevArrow:
+        "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+      nextArrow:
+        "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+});
+</script>
+<script>
+  const userId = document.getElementById("userId").getAttribute("data-id");
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('73db31bea0f8d7aa1830', {
+    cluster: 'ap1'
+  });
+  var channel = pusher.subscribe(`${userId}`);
+  const dataNoti = document.getElementById("data-noti");
+  let numOfNoti = parseInt(dataNoti.getAttribute("data-number"));
+  console.log('number of noti: ', numOfNoti);
+  const labelNumberNoti = document.getElementsByClassName("numberNotify");
+
+  const toastBody = document.getElementsByClassName("toast-body");
+  channel.bind('my-event', function(data) {
+    numOfNoti = numOfNoti + 1;
+    labelNumberNoti[0].style.display = "inline-block";
+    labelNumberNoti[0].innerHTML = `${numOfNoti}`;
+    toastBody[0].innerHTML = data.message;
+    $('.toast').toast('show');
+  //   alert(JSON.stringify(data));
+    // notifiText.innerHTML = JSON.stringify(data);
+  });
+</script>
+  </body>
+</html>

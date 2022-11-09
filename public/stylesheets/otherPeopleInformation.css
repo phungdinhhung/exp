@@ -1,0 +1,73 @@
+.container-fluid {
+    border: 2px solid black;
+}
+.avt {
+    min-height: 150px;
+}
+.avt-item {
+    width: 300px !important;
+    height: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+.avt-item img {
+    width: 100%;
+    height: 100%;
+}
+.number {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.information {
+    min-height: 150px;
+    text-align: center;
+}
+label {
+    color: #95afc0;
+    font-weight: 700;
+    display: block !important;
+    margin-right: 60px;
+    width: 180px !important;
+}
+.openBtn {
+    display: inline-block !important;
+}
+.closeBtn {
+    display: none !important;
+    pointer-events: none;
+}
+
+.list-room {
+    display: flex;
+}
+.room-item {
+    width: 300px;
+    padding: 4px;
+    margin: 0 4px;
+    border: 1px solid blanchedalmond;
+    border-radius: 5px;
+}
+.img-container {
+    width: 100%;
+    height: 150px;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+.infor-room label {
+    font-weight: 600;
+    color: black;
+    width: 80px;
+}
+.infor-room p {
+    width: 100%;
+}
+.description {
+    height: 190px;
+    overflow: hidden;
+}
+.btn {
+    margin-top: 16px !important;
+}

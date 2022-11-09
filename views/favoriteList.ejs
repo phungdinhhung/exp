@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/favoriteList.css' />
+    <link rel="stylesheet" href="<%= process.env.BASE_URL %>/stylesheets/header.css" />
+</head>
+
+<body>
+    <div class="container">
+        <%- include('./components/header')%>
+            <div class="favorite-list">
+                <h3>Danh sách phòng yêu thích của bạn</h3>
+                <div class="list-room">
+                    <%if(listFavoriteRoom.length>0) {%>
+                        <%for(let i=0; i<listFavoriteRoom.length; i++) {%>
+                            <div class="room">
+                                <div class="image-room">
+                                    <img src="<%=listFavoriteRoom[i].images[0].url%>" alt="">
+                                </div>
+                                <h3 class="type">
+                                    <label>Kiểu phòng: </label>
+                                    <%=listFavoriteRoom[i].type%>
+                                </h3>
+                                <div class="acreage">
+                                    <label>Diện tích: </label>
+                                    <%=listFavoriteRoom[i].acreage%> m2
+                                </div>
+                                <div class="address">
+                                    <label>Địa chỉ: </label>
+                                    <%=listFavoriteRoom[i].address%>
+                                </div>
+                                <div class="price">
+                                    <label>Giá phòng: </label>
+                                    <%=listFavoriteRoom[i].price%> vnd/ 1 tháng
+                                </div>
+                                <div class="description">
+                                    <label>Mô tả: </label>
+                                    <%=listFavoriteRoom[i].description%>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn-view-detail btn-outline-success" href="/room/<%=listFavoriteRoom[i]._id%>">Xem chi tiết</a>
+                                    <form action="/favoriteList/room/unlike/<%=listFavoriteRoom[i]._id%>?_method=DELETE" method="POST" id="form-delete">
+                                        <button type="submit" class="btn-delete btn btn-outline-success" data-id="<%=listFavoriteRoom[i]._id%>">Bỏ yêu thích</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <%}%>
+                                <%} else {%>
+                                    <div>Bạn chưa có danh sách phòng yêu thích</div>
+                                    <% } %>
+                </div>
+            </div>
+
+            <footer>
+                <div>Copyright @C2SE.14</div>
+            </footer>
+            <script>
+                //code logic
+                const deleteBtn = document.getElementsByClassName("btn-delete");
+                const formDelete = document.getElementById("form-delete");
+                console.log('formDelete: ', formDelete);
+                Array.prototype.forEach.call(deleteBtn, (btn) => {
+                    btn.addEventListener('click', function(e) {
+                        const roomId = btn.getAttribute('data-id');
+                        console.log('roomId: ', roomId);
+                        // let actionForm = `/favoriteList/room/unlike/${roomId}?_method=DELETE`;
+                        let actionForm = "/favoriteList/room/unlike/" + roomId + "?_method=DELETE"
+                            // formDelete.setAttribute("action", actionForm);
+                    })
+                })
+            </script>
+    </div>
+    
+</body>
+
+</html>

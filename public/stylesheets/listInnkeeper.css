@@ -1,0 +1,32 @@
+body {
+    position: relative;
+    min-height: 750px;
+}
+a {
+    color: black;
+}
+.container {
+    margin-top: 16px;
+}
+.innkeeper-item {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #dcdde1;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+label {
+    width: 150px;
+    font-weight: 600;
+    color: #2f3640;
+}
+.avt {
+    width: 100%;
+    height: 200px;
+}
+.avt img {
+    width: 100%;
+    height: 100%;
+}

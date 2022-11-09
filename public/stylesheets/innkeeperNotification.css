@@ -1,0 +1,13 @@
+.row {
+    padding-top: 20px;
+}
+.col-md-9 {
+    border-left: 1px solid #b2bec3;
+}
+.notifi-item {
+    padding: 10px;
+    border-bottom: 1px solid #b2bec3;
+}
+.btn-delete-notifi {
+    border: none;
+}

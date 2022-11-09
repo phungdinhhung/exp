@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/otherPeopleInformation.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <%- include('./components/header')%>
+    <div class="container">
+      <div class="avt row">
+        <div class="avt-item col-md-8">
+          <img src="<%=userInfor.avatar%>" alt="Ảnh đại diện" />
+        </div>
+        <div class="col-md-4 number">
+          <p class="numberRoom">
+            <label for="">Tổng số phòng: </label> <%=total%>
+          </p>
+          <p class="numberRoom">
+            <label for="">Số phòng đã cho thuê: </label> <%=numberRoom%>
+          </p>
+          <p class="numberRoom"><label for="">Tỉ lệ: </label> <%=ratio%>%</p>
+          <%if(role === "Người thuê trọ"){%>
+            <div class="btn-group">
+              <%if(isFollow === "false") {%>
+              <button
+                type="button=="
+                class="btn btn-outline-danger"
+                id="btn-follow"
+                data-id="<%=userInfor._id%>"
+                onclick="handleFollow()"
+              >
+                Theo dõi chủ trọ
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                id="btn-unFollow"
+                data-id="<%=userInfor._id%>"
+                onclick="handleUnFollow()"
+                style="display: none"
+              >
+                Hủy theo dõi
+              </button>
+              <%} else if(isFollow === "true") {%>
+              <button
+                type="button=="
+                class="btn btn-outline-danger"
+                id="btn-follow"
+                data-id="<%=userInfor._id%>"
+                onclick="handleFollow()"
+                style="display: none"
+              >
+                Theo dõi chủ trọ
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                id="btn-unFollow"
+                data-id="<%=userInfor._id%>"
+                onclick="handleUnFollow()"
+              >
+                Hủy theo dõi
+              </button>
+              <%}%>
+            </div>
+          <%}%>
+        </div>
+      </div>
+      <hr />
+      <div class="information">
+        <p class="username">
+          <label>Tên người dùng: </label>
+          <%=userInfor.username%>
+        </p>
+        <p class="phoneNumber">
+          <label>Số điện thoại: </label>
+          <%=userInfor.phoneNumber%>
+        </p>
+        <p class="date">
+          <label>Ngày tham gia: </label>
+          <%=startDate%>
+        </p>
+      </div>
+      <hr />
+      <div class="totalRoom">
+        <h4>Các phòng trọ của <%=userInfor.username%></h4>
+        <div class="list-room">
+          <%for(let i =0; i< listRoom.length; i++) {%>
+          <div class="room-item">
+            <div class="img-container">
+              <img src="<%=listRoom[i].images[0].url%>" alt="" />
+            </div>
+            <div class="infor-room">
+              <p><label for="">Kiểu phòng: </label> <%=listRoom[i].type%></p>
+              <hr />
+              <p><label for="">Giá: </label> <%=listRoom[i].price%></p>
+              <hr />
+              <p><label for="">Địa chỉ: </label> <%=listRoom[i].address%></p>
+              <hr />
+              <p class="description">
+                <label for="">Mô tả: </label><%=listRoom[i].description%>
+              </p>
+              <hr />
+              <p>
+                <a
+                  class="btn-view-detail btn-outline-success"
+                  href="/room/<%=listRoom[i]._id%>"
+                  >Xem chi tiết</a
+                >
+              </p>
+              <hr />
+            </div>
+          </div>
+          <%}%>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    const btnFollow = document.getElementById("btn-follow");
+    const btnUnFollow = document.getElementById("btn-unFollow");
+    console.log("btn Follow: ", btnFollow);
+    console.log("btn unFollow: ", btnUnFollow);
+    function handleFollow() {
+      const id = btnFollow.getAttribute("data-id");
+      $.ajax({
+        url: `http://localhost:5000/user/people/follow/${id}`,
+        type: "POST",
+        success: function (response) {
+          if (response.msg === "Follow successfully") {
+            msg = response.msg;
+            if (btnUnFollow !== null) {
+              btnUnFollow.classList.add("openBtn");
+              btnUnFollow.classList.remove("closeBtn");
+            }
+            btnFollow.classList.add("closeBtn");
+          }
+        },
+      });
+    }
+    function handleUnFollow() {
+      const id = btnUnFollow.getAttribute("data-id");
+      $.ajax({
+        url: `http://localhost:5000/user/people/unFollow/${id}`,
+        type: "POST",
+        success: function (response) {
+          if (response.msg === "successfully") {
+            msg = response.msg;
+            if (btnFollow !== null) {
+              btnFollow.classList.add("openBtn");
+              btnFollow.classList.remove("closeBtn");
+            }
+            btnUnFollow.classList.add("closeBtn");
+          }
+        },
+      });
+    }
+  </script>
+</html>

@@ -1,0 +1,41 @@
+body {
+    position: relative;
+    min-height: 1000px;
+}
+.list-room {
+    display: flex;
+    margin-top: 20px;
+}
+.room-item {
+    padding: 0 16px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    height: 400px;
+}
+.description {
+    height: 100px;
+    overflow: hidden;
+}
+.btn {
+    margin-top: -4px !important;
+}
+.avt {
+    width: 100px;
+    height: 100px;
+    margin-right: 6px;
+}
+.avt img {
+    width: 100%;
+    height: 100%;
+}
+.list-image {
+    display: flex;
+}
+.close-modal {
+    display: none;
+}
+.open-modal {
+    display: block;
+}
+.page-item.active .page-link {
+    z-index: 0 !important;
+}

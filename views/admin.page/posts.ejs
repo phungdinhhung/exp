@@ -1,0 +1,44 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<%for(let i = 0; i < post.length; i++) {%>
+    <div class="room-item">
+          <div class="image-room">
+            <img src="<%=post[i].images[0].url%>" alt="">
+          </div>
+          <div class="room-infor">
+            <div class="type infor-item"><label>Kiểu phòng:</label> <%=post[i].type%></div>
+            <div class="acreage infor-item"><label>Diện tích:</label> <%=post[i].acreage%> m3</div>
+            <div class="address infor-item"><label>Địa chỉ:</label> <%=post[i].address%></div>
+            <div class="description infor-item"><label>Mô tả:</label> <%=post[i].description%></div>
+            <div class="price infor-item"><label>Giá phòng:</label> <%=post[i].price%> / 1 tháng</div>
+            <% if(post[i].state === true){%>
+              <div class="state infor-item" style="color: green">Tình trạng: Còn phòng</div>
+            <% } %>
+            <div class="poster infor-item"><label>Người đăng tải:</label> <%=post[i].username%></div>
+          </div>
+          <a class="btn-view-detail btn-outline-success" href="/room/<%=post[i]._id%>">Xem chi tiết</a>
+          <form action="/admin/accept/<%=post[i].id%>?_PUT" method="POST">
+            <%if(post[i].isAccept === false) {%>
+              <button type="submit" class="btn btn-outline-primary">Xét duyệt</button>
+            <%}%>
+          </form>
+          <form action="/admin/delete/<%=post[i].id%>" method="POST">
+            <button type="submit" class="btn btn-outline-primary">Xóa</button>
+          </form>
+    </div>
+  <% } %>
+
+  <script>
+    $('.list-room').slick({
+    lazyLoad: 'ondemand',
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    prevArrow:
+          "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+        nextArrow:
+          "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+  });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

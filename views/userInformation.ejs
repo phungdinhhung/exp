@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/userInformation.css' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  </head>
+  <body>
+    <div id="cover-background">
+    <%- include('./components/header')%>
+    <div class="container-fluid" id="container-content">
+      <div class="content row">
+        <div class="avt col-md-4">
+          <div class="avt-item">
+            <div class="img-container">
+              <img src="<%=userInfor[0].avatar%>" alt="user avatar">
+            </div>
+            <form method="POST" action="/user/upload/avatar" enctype="multipart/form-data" class="form-update-avt">
+              <div class="form-group">
+                <!-- <input type='file' id="getFile" name="file"> -->
+                <input type="file" name="file" class="form-control" id="customFile"/>
+              </div>
+              <button class="btn-update-avt btn-outline-success" type="submit">Thay đổi ảnh đại diện</button>
+            </form>
+            <!-- <button class="btn-change-avt btn btn-primary">Thay đổi ảnh đại diện</button> -->
+          </div>
+        </div>
+        <div class="col-md-8 infor">
+          <h3 class="title">Thông tin cá nhân</h3>
+          <div class="username infor-item"><label>Tên người dùng: </label> <%=userInfor[0].username%></div>
+          <hr>
+          <div class="email infor-item"><label>email: </label> <%=userInfor[0].email%></div>
+          <hr>
+          <div class="phoneNumber infor-item"><label>Số điện thoại: </label> <%=userInfor[0].phoneNumber%></div>
+          <hr>
+          <div class="btn-group">
+            <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black" class="btn-update-infor btn btn-primary" onclick="handleOpenModalUpdateInfor()">Cập nhật thông tin cá nhân</button>
+            <button onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-black" class="btn-change-password btn btn-primary">Thay đổi mật khẩu</button>
+          </div>
+        </div>
+      </div>
+      <!-- <footer>
+        <div>Copyright @C2SE.14</div>
+      </footer> -->
+      <%- include('./components/footer')%>
+    </div>
+  </div>
+  <!-- Update avatar -->
+  <!-- <div class="modal-avt">
+    <form method="POST" action="" enctype="multipart/form-data" class="update-chapter-form" id="edit-video">
+      <div class="form-group">
+        <label for="video_url" class="modal-label">Choose image</label>
+        <input type="file" name="video_url"/>
+      </div>
+      <button type="submit" class="btn-add-chapter btn-modal">Update video</button>
+    </form>
+  </div> -->
+    <!-- Update user information -->
+    <div id="id-update" class="modal-update-infor">
+      <!-- <form action="/user/update?_method=PUT" method="POST" class="form-update-infor">
+        <div class="mb-3 col-md-6">
+          <label for="inputPassword" class="col-sm-2 col-form-label">username</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword" name="username">
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="inputPassword" class="col-sm-2 col-form-label">email</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword" name="email">
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="inputPassword" class="col-sm-4 col-form-label">phone number</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword" name="phoneNumber">
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-outline-success btn-modal" onclick="handleBtnUpdateInfor()">Cập nhật</button>
+          <button type="button" class="btn btn-outline-success btn-modal" onclick="handleCloseModal()">Đóng</button>
+        </div>
+      </form> -->
+    </div>
+    <!-- Update password-->
+    <!-- <div id="password-update" class="modal-update-infor">
+      <form action="/user/update?_method=PUT" method="POST" class="form-update-infor">
+        <div class="mb-3 col-md-6">
+          <label for="inputPassword" class="col-sm-2 col-form-label">Mật khẩu cũ</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword" name="oldPassword" required>
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="inputPassword" class="col-sm-2 col-form-label">Mật khẩu mới</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword" name="newPassword" required>
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="inputPassword" class="col-sm-2 col-form-label">Nhập lại mật khẩu mới</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword" name="ReNewPassword" required>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-outline-success btn-modal" onclick="handleBtnUpdatePassword()">Thay đổi</button>
+          <button type="button" class="btn btn-outline-success btn-modal" onclick="handleCloseModalPassword()">Đóng</button>
+        </div>
+      </form>
+    </div> -->
+    <!-- <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Modal</button> -->
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <form action="/user/update?_method=PUT" method="POST" class="form-update-infor">
+          <div class="mb-3 col-md-6">
+            <label for="inputPassword" class="col-sm-2 col-form-label">username</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputPassword" name="username">
+            </div>
+          </div>
+          <!--  -->
+          <div class="mb-3 col-md-6">
+            <label for="inputPassword" class="col-sm-4 col-form-label">phone number</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputPassword" name="phoneNumber">
+            </div>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-outline-success btn-modal" onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">Cập nhật</button>
+            <button type="button" class="btn btn-outline-success btn-modal" onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">Đóng</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="id02" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <form action="/user/update?_method=PUT" method="POST" class="form-update-infor">
+          <div class="mb-3 col-md-6">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Mật khẩu cũ</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" name="oldPassword" required>
+            </div>
+            <%if(msg1 !== ""){%>
+              <p><%=msg1%></p>
+            <%}%>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Mật khẩu mới</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" name="newPassword" required>
+            </div>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Nhập lại mật khẩu mới</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" name="ReNewPassword" required>
+            </div>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-outline-success btn-modal" onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">Thay đổi</button>
+            <button type="button" class="btn btn-outline-success btn-modal" onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">Đóng</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script>
+    const modalUpdate = document.getElementById("id-update");
+    const container = document.getElementById("container-content");
+    const body = document.getElementById("cover-background");
+    const handleOpenModalUpdateInfor = () => {
+      modalUpdate.classList.toggle("openModal");
+      body.classList.add("cover-modal");
+    }
+    const handleBtnUpdateInfor = () => {
+      modalUpdate.classList.toggle("openModal");
+      body.classList.remove("cover-modal");
+    }
+    const handleCloseModal = () => {
+      modalUpdate.classList.toggle("openModal");
+      body.classList.remove("cover-modal");
+    }
+  </script>
+  <script>
+    // const btnAvt = document.getElementById("btn-avt");
+
+    // btnAvt.addEventListener("click", () => {
+    //   console.log('ok');
+    //   $.ajax({
+    //     url: `/user/upload/avatar`,
+    //     type: "POST",
+    //     success: function (response) {
+    //       console.log(response);
+    //     }
+    //   });
+    // })
+  </script>
+  </html>

@@ -1,0 +1,42 @@
+.form-group {
+
+}
+.group-select {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px !important;
+}
+.group-select select {
+    padding: 10px;
+}
+#numberRoom {
+    display: inline-block;
+    width: 90%;
+    padding: 10px;
+    margin-left: 20px;
+}
+#title {
+    display: inline-block;
+    width: 90%;
+    padding: 10px;
+    margin-left: 20px;
+}
+textarea {
+    margin-left: 20px !important;
+}
+.form-group-price {
+    display: flex;
+}
+.form-select-price {
+    width: 50%;
+}
+.form-group-price input {
+    padding: 10px;
+}
+.buttons-container {
+    margin-top: 10px;
+}
+.buttons-container button {
+    border: none;
+    padding: 10px;
+}

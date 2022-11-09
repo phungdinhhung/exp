@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+li {
+    list-style-type: none;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+.list-room {
+    display: flex;
+    margin-top: 40px;
+    height: 710px;
+  }
+  .room {
+    padding: 10px;
+    width: 320px;
+    height: 530px;
+    border-radius: 5px;
+    margin-left: 20px !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .image-room {
+    width: 300px;
+    height: 120px;
+  }
+  .image-room img{
+    width: 100%;
+    height: 100%;
+  }
+label {
+  display: block;
+  font-weight: 700;
+}
+  .type {
+    margin-top: 6px;
+  }
+  .acreage {
+    margin-top: 6px;
+  }
+  .address {
+    margin-top: 6px;
+    height: 60px;
+    overflow: hidden;
+  }
+  .description {
+    margin-top: 6px;
+    height: 120px;
+    overflow: hidden;
+  }
+  footer {
+    height: 100px;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-delete {
+    margin-top: -40px !important;
+    background-color: "#ff7979" !important;
+  }
+  .btn:hover {
+    cursor: pointer;
+  }
+  .btn-view-detail {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+  }

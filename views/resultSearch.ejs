@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+  </head>
+  <body>
+    <div class="container">
+      <%- include('./components/header')%>
+      <h3>Có <%=listRoom.length%> kết quả được tìm thấy</h3>
+      <div class="list-room">
+        <%for(let i = 0; i < listRoom.length; i++) {%>
+          <div class="room-item">
+                <div class="image-room">
+                  <img src="<%=listRoom[i].images[0].url%>" alt="">
+                </div>
+                <div class="room-infor">
+                  <div class="type infor-item"><label>Kiểu phòng:</label> <%=listRoom[i].type%></div>
+                  <div class="acreage infor-item"><label>Diện tích:</label> <%=listRoom[i].acreage%> m2</div>
+                  <div class="address infor-item"><label>Địa chỉ:</label> <%=listRoom[i].address%></div>
+                  <div class="description infor-item"><label>Mô tả:</label> <%=listRoom[i].description%></div>
+                  <div class="price infor-item"><label>Giá phòng:</label> <%=listRoom[i].price%> / 1 tháng</div>
+                  <% if(listRoom[i].state === true){%>
+                    <div class="state infor-item" style="color: green">Tình trạng: Còn phòng</div>
+                  <% } %>
+                  <div class="poster infor-item"><label>Người đăng tải:</label> <%=listRoom[i].username%></div>
+                  <!-- <% if(user) {%> -->
+                  <!-- <form action="/favoriteList/room/like/<%=listRoom[i]._id%>" method="POST" onsubmit="handleSubmit">
+                    <input type="submit" value="Yêu thích" class="btn-like"/>
+                  </form> -->
+                  <!-- <% } %> -->
+                </div>
+                <a class="btn btn-outline-success" href="/room/<%=listRoom[i]._id%>">Xem chi tiết</a>
+          </div>
+        <% } %>
+      </div>
+      <%- include('./components/footer')%>
+    </div>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="slick/slick.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  $('.list-room').slick({
+  lazyLoad: 'ondemand',
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  prevArrow:
+        "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+      nextArrow:
+        "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+});
+</script>
+  </body>
+</html>
